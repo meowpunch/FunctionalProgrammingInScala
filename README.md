@@ -1,5 +1,5 @@
-# Functional Programming Paradigm In Scala
-Learn Functional Programming Paradigm In Scala with [Coursera](https://www.coursera.org/learn/progfun1)
+# Functional Programming Principles in Scala
+Learn Functional Programming Principles in Scala with [Coursera](https://www.coursera.org/learn/progfun1)
 
 - Week 1. Recursion
 - Week 2. Higher Order Functions
