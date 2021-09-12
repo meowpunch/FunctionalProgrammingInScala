@@ -39,6 +39,10 @@ class RecFunSuite extends munit.FunSuite:
     assertEquals(countChange(300,List(500,5,50,100,20,200,10)), 1022)
   }
 
+  test("countChange: empty list") {
+    assertEquals(countChange(0,List()), 0)
+  }
+
   // ------ pascal tests ------------------------------------------------------
 
   test("pascal: col=0,row=2") {
