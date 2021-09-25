@@ -5,6 +5,11 @@ abstract class IntSet:
 
   def union(s: IntSet): IntSet
 
+object IntSet:
+  def apply(): IntSet = Empty
+  def apply(e: Int) = Empty.incl(e)
+  def apply(a: Int, b: Int) = Empty.incl(a).incl(b)
+
 /**
  * store Int to tree (sorted like binarytree)
  *
@@ -38,9 +43,9 @@ class NonEmpty(elem: Int, left: IntSet, right: IntSet) extends IntSet :
     s"$left $elem $right"
 
 
-// consider `class -> sigleton object`
-class Empty() extends IntSet :
-  def incl(x: Int): IntSet = NonEmpty(x, Empty(), Empty())
+
+object Empty extends IntSet:
+  def incl(x: Int): IntSet = NonEmpty(x, Empty, Empty)
 
   def contains(x: Int): Boolean = false
 
@@ -49,7 +54,7 @@ class Empty() extends IntSet :
   override def toString: String = ""
 
 
-NonEmpty(1, Empty(), Empty()).incl(2).incl(4).incl(5)
-val s1 = NonEmpty(4, Empty(), Empty()).incl(1).incl(2).incl(5)
-val s2 = NonEmpty(3, Empty(), Empty()).incl(5).incl(2).incl(7)
+NonEmpty(1, Empty, Empty).incl(2).incl(4).incl(5)
+val s1 = NonEmpty(4, Empty, Empty).incl(1).incl(2).incl(5)
+val s2 = NonEmpty(3, Empty, Empty).incl(5).incl(2).incl(7)
 s1.union(s2)
