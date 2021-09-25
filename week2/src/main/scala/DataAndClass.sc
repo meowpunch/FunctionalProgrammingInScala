@@ -11,14 +11,27 @@ class Rational(x: Int, y: Int): // val x, val y
   def add(that: Rational): Rational = Rational(this.numer * that.denom + that.numer * this.denom, this.denom * that.denom)
   def + (that: Rational): Rational = this.add(that)
 
+  // a/b < c/d => a*d < b*c
+  def less(that: Rational): Boolean = this.numer * that.denom < that.numer * this.denom
+
   override def toString: String = s"$numer/$denom"
 
 
+extension (r: Rational)
+  def min(s: Rational): Rational = if r.less(s) then r else s
 
-Rational(1, 0)
+Rational(1, 0)  // IllegalArgumentException
+
 val r = Rational(2, 4)
-r.add(Rational(1, 3))
-r add Rational(1,3)
-r + Rational(1,3)
-r.+(Rational(1,3))
+val s = Rational(1, 3)
 
+r.less(s)
+
+r.add(s)
+r add s
+
+r + s
+r.+(s)
+
+r.min(s)
+r min s
