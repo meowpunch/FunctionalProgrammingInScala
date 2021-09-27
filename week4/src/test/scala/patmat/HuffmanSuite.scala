@@ -9,9 +9,9 @@ class HuffmanSuite extends munit.FunSuite:
     /*
      *    c => 1, a => 2, b => 3, d => 4
      *          cabd
-     *        cab
-     *      ca
-     *    c   a  b  d
+     *      d       cab
+     *            ca
+     *          c   a  b
      */
     val t3 = createCodeTree("aabbbcdddd".toList)
   }
@@ -54,18 +54,19 @@ class HuffmanSuite extends munit.FunSuite:
 
 
   test("createTree from chars") {
+    // c => 1 a => 2 b => 3
     val charlist = "aabbbc".toList
     assertEquals(createCodeTree(charlist), Fork(Fork(Leaf('c',1),Leaf('a',2),List('c', 'a'),3), Leaf('b',3), List('c', 'a', 'b'), 6))
   }
 
   test("decode") {
     new TestTrees:
-      assertEquals(decode(t3, List(0,0,0,1)), List('c','d'))
+      assertEquals(decode(t3, List(1,0,0,0)), List('c','d'))
   }
 
   test("encode") {
     new TestTrees:
-      assertEquals(encode(t3)(List('a','b')), List(0,0,1,0,1))
+      assertEquals(encode(t3)(List('a','b')), List(1,0,1,1,1))
   }
 
   test("decode and encode a very short text should be identity (10pts)") {
@@ -75,7 +76,7 @@ class HuffmanSuite extends munit.FunSuite:
 
   test("quickEncode") {
     new TestTrees:
-      assertEquals(quickEncode(t3)(List('a','b')), List(0,0,1,0,1))
+      assertEquals(quickEncode(t3)(List('a','b')), List(1,0,1,1,1))
   }
 
   import scala.concurrent.duration.*

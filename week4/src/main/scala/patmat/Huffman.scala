@@ -106,9 +106,17 @@ trait Huffman extends HuffmanInterface :
    * unchanged.
    */
   def combine(trees: List[CodeTree]): List[CodeTree] = trees match
-    case x1 :: x2 :: tail => makeCodeTree(x1, x2) :: tail
+    case x1 :: x2 :: tail => insert(tail, makeCodeTree(x1, x2))
     case _ => trees
 
+
+  def insert(trees: List[CodeTree], tree: CodeTree): List[CodeTree] =
+    @tailrec
+    def loop(restTrees: List[CodeTree], acc: List[CodeTree]): List[CodeTree] = restTrees match
+      case Nil => acc.appended(tree)
+      case h :: t => if weight(h) >= weight(tree) then acc.appended(tree) ::: restTrees else loop(t, acc.appended(h))
+
+    loop(trees, List())
   /**
    * This function will be called in the following way:
    *
@@ -158,6 +166,7 @@ trait Huffman extends HuffmanInterface :
         case (Nil, _: Fork) => acc
         case (headBit :: tail, Leaf(c, _)) => loop(headBit :: tail, tree, acc.appended(c))
         case (headBit :: tail, Fork(l, r, _, _)) => if headBit == 1 then loop(tail, r, acc) else loop(tail, l, acc)
+        case _ => throw IllegalArgumentException()
       }
 
     loop(bits, tree, List())
@@ -240,7 +249,7 @@ trait Huffman extends HuffmanInterface :
    * use it in the `convert` method above, this merge method might also do some transformations
    * on the two parameter code tables.
    */
-  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = b ::: a
+  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = a ::: b
 
   /**
    * This function encodes `text` according to the code tree `tree`.
