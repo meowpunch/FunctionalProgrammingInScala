@@ -1,0 +1,5 @@
+val xs = List("abc", "acb", "dfc", "abcd", "b", "a")
+xs.groupBy(s => s)
+xs.groupBy(identity)
+xs.groupBy(s => s.charAt(0))
+xs.groupBy(_.size)
