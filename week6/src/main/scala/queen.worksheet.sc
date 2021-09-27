@@ -1,4 +1,5 @@
 import scala.annotation.tailrec
+import scala.collection.immutable.HashMap
 
 /*
  * xqxx
@@ -8,6 +9,7 @@ import scala.annotation.tailrec
  *
  */
 def isSafe(col: Int, queens: List[Int]): Boolean = {
+  @tailrec
   def loop(restQueens: List[Int], deltaRow: Int): Boolean =
     restQueens match {
       case Nil => true
@@ -41,3 +43,8 @@ def queen(n: Int): Set[List[Int]] =
 
 
 queen(4)
+queen(8)
+
+val s = Set(1,2,3)
+s.head
+s.tail
