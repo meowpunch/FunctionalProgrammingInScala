@@ -8,3 +8,5 @@ Learn Functional Programming Principles in Scala with [Coursera](https://www.cou
 - Week 4. Types and Pattern Matching.
 - Week 5. Lists
 - Week 6. Collections
+
+They includes each worksheet exercise and week project.
