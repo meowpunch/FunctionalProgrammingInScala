@@ -4,7 +4,6 @@ Learn Functional Programming Principles in Scala  by Martin Odersky [Coursera](h
 - Week 1. Recursion
 - Week 2. Higher Order Functions
 - Week 3. Data and Abstraction
-- Week 4. Types and Patterns
 - Week 4. Types and Pattern Matching.
 - Week 5. Lists
 - Week 6. Collections
