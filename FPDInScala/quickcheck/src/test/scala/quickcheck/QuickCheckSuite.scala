@@ -6,23 +6,24 @@ import org.scalacheck.Arbitrary.*
 import org.scalacheck.Prop
 import org.scalacheck.Test.{check, Result, Failed, PropException}
 
-object QuickCheckBinomialHeap extends QuickCheckHeap with BinomialHeap
+object QuickCheckBinomialHeap extends QuickCheckHeap with Bogus3BinomialHeap
 
-class QuickCheckSuite extends munit.FunSuite:
+class QuickCheckSuite extends munit.FunSuite :
   def checkBogus(p: Properties): Unit =
     def fail = throw AssertionError(
       s"A bogus heap should NOT satisfy all properties. Try to find the bug!")
 
     check(asProp(p))(identity) match
       case r: Result => r.status match
-        case _: Failed         => () // OK: scalacheck found a counter example!
-        case p: PropException  => p.e match
+        case _: Failed => () // OK: scalacheck found a counter example!
+        case p: PropException => p.e match
           case e: NoSuchElementException => () // OK: the implementation throws NSEE
           case _ => fail
         case _ => fail
 
   /** Turns a `Properties` instance into a single `Prop` by combining all the properties */
-  def asProp(properties: Properties): Prop = Prop.all(properties.properties.map(_._2).toSeq*)
+  def asProp(properties: Properties): Prop = Prop.all(properties.properties.map(_._2).toSeq *)
+
 
   test("Binomial heap satisfies properties. (5pts)") {
     assert(
@@ -51,4 +52,5 @@ class QuickCheckSuite extends munit.FunSuite:
   }
 
   import scala.concurrent.duration.*
+
   override val munitTimeout = 10.seconds
