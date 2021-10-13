@@ -1,5 +1,5 @@
 # Functional Program Design in Scala
-Learn Functional Program Design in Scala  by Martin Odersky [Coursera](https://www.coursera.org/learn/progfun1)
+Learn Functional Program Design in Scala  by Martin Odersky [Coursera](https://www.coursera.org/learn/scala-functional-program-design)
 
 - Week 1. For Expressions and Monads
 - Week 2. Lazy Evaluation
