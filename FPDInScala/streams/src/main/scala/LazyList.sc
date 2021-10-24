@@ -13,8 +13,8 @@ val ll: LazyList[Int] = LazyList.from(2).filter(
 ll.take(2).toList // doesn't work
 
 def makeLazyList(s: LazyList[Int]): LazyList[Int] =
-  // don't need a base case
-  // the rest of #:: will be not evaluated
+// don't need a base case
+// the rest of #:: will be not evaluated
   s.head #:: makeLazyList(s.tail.filter(s.head + 1 < _))
 
 makeLazyList(LazyList.from(0)).take(3).toList
@@ -28,5 +28,15 @@ l(LazyList.from(0)).take(3).toList
 def makeList(s: List[Int]): List[Int] =
   s.head :: makeList(s.tail)
 
-makeList(List(1,2,3,4,5))
+makeList(List(1, 2, 3, 4, 5))
 
+
+val v = Vector(
+  Vector(1, 2, 3),
+  Vector(4, 5),
+  Vector(6)
+)
+
+v.indexOf(Vector(4, 5))
+v.indexWhere(_.contains(1))
+v(2)(2)
