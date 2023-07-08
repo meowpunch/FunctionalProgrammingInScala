@@ -1,8 +1,8 @@
 case class Person(surname: String, name: String, age: Int)
 
 object Givens {
-  private val personOrdering: Ordering[Person] = (x: Person, y: Person) => {
-    x.surname.compareTo(y.surname)
+  private val personOrderingByName: Ordering[Person] = (x: Person, y: Person) => {
+    x.name.compareTo(y.name)
   }
 
   private def listPeople(people: Seq[Person])(ordering: Ordering[Person]): Seq[Person] = ???
@@ -27,9 +27,12 @@ object Givens {
       // import given
       import DefaultValues.defaultPersonOrdering
 
-      println(personOrdering.compare(people.head, people.last))
-      println(defaultPersonOrdering.compare(people.head, people.last))
+      val ab = Person("A", "B", 1)
+      val ba = Person("B", "A", 1)
+      println(personOrderingByName.compare(ab, ba))
+      println(defaultPersonOrdering.compare(ab, ba))
 
+      println(listPeopleWithDefault(people))
       println(listPeopleWithDefault(people))
       println(findFirstPersonInOrderWithDefault(people))
 
